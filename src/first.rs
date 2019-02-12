@@ -18,6 +18,7 @@ impl List {
     pub fn new() -> Self {
         List { head: Link::Empty }
     }
+
     pub fn push(&mut self, elem: i32) {
         let new_node = Node {
             elem,
@@ -26,6 +27,7 @@ impl List {
 
         self.head = Link::More(Box::new(new_node));
     }
+
     pub fn pop(&mut self) -> Option<i32> {
         match mem::replace(&mut self.head, Link::Empty) {
             Link::Empty => None,
@@ -50,6 +52,7 @@ impl Drop for List {
 #[cfg(test)]
 mod test {
     use super::List;
+
     #[test]
     fn basics() {
         let mut list = List::new();

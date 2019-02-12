@@ -15,6 +15,7 @@ impl List {
     pub fn new() -> Self {
         List { head: None }
     }
+
     pub fn push(&mut self, elem: i32) {
         let new_node = Node {
             elem,
@@ -23,6 +24,7 @@ impl List {
 
         self.head = Some(Box::new(new_node));
     }
+
     pub fn pop(&mut self) -> Option<i32> {
         match mem::replace(&mut self.head, None) {
             None => None,
