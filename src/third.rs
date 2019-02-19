@@ -57,6 +57,16 @@ impl<'a, T> Iterator for Iter<'a, T> {
     }
 }
 
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut current_list = self.head.take();
+
+        while let Some(node) = current_list {
+            current_list = node.next.clone();
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::List;
