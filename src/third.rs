@@ -59,10 +59,14 @@ impl<'a, T> Iterator for Iter<'a, T> {
 
 impl<T> Drop for List<T> {
     fn drop(&mut self) {
-        let mut current_list = self.head.take();
+        let mut head = self.head.take();
 
-        while let Some(node) = current_list {
-            current_list = node.next.clone();
+        while let Some(node) = head {
+            if let Ok(mut node) = Rc::try_unwrap(node) {
+                head = node.next.take();
+            } else {
+                break;
+            }
         }
     }
 }
