@@ -128,6 +128,12 @@ impl<T> List<T> {
             Ref::map(node.borrow(), |node| &node.elem)
         })
     }
+
+    pub fn peek_back_mut(&mut self) -> Option<RefMut<T>> {
+        self.tail.as_ref().map(|node| {
+            RefMut::map(node.borrow_mut(), |node| &mut node.elem)
+        })
+    }
 }
 
 impl<T> Drop for List<T> {
