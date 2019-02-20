@@ -50,6 +50,26 @@ impl<T> List<T> {
         }
     }
 
+    pub fn push_back(&mut self, elem: T) {
+        // new node needs +2 links, everything else should be +0
+        let new_tail = Node::new(elem);
+        match self.tail.take() {
+            Some(old_tail) => {
+                // non-empty list, need to connect the old_head
+                old_tail.borrow_mut().prev = Some(new_tail.clone()); // +1 new_head
+                new_tail.borrow_mut().next = Some(old_tail);         // +1 old_head
+                self.tail = Some(new_tail);             // +1 new_head, -1 old_head
+                // total: +2 new_head, +0 old_head -- OK!
+            }
+            None => {
+                // empty list, need to set the tail
+                self.head = Some(new_tail.clone());
+                self.tail = Some(new_tail);
+                // total: +2 new_head -- OK!
+            }
+        }
+    }
+
     pub fn pop_front(&mut self) -> Option<T> {
         // need to take old head, ensuring it's -2
         self.head.take().map(|old_head| {               // -1 old
