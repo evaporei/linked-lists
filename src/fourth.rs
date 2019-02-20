@@ -91,6 +91,27 @@ impl<T> List<T> {
         })
     }
 
+    pub fn pop_back(&mut self) -> Option<T> {
+        // need to take old head, ensuring it's -2
+        self.tail.take().map(|old_tail| {               // -1 old
+            match old_tail.borrow_mut().next.take() {
+                Some(new_tail) => {                     // -1 new
+                    // not emptying list
+                    new_tail.borrow_mut().prev.take();  // -1 old
+                    self.tail = Some(new_tail);         // +1 new
+                    // total: -2 old, +0 new
+                }
+                None => {
+                    // emptying list
+                    self.head.take();
+                    // total: -2 old, (no new)
+                }
+            };
+
+            Rc::try_unwrap(old_tail).ok().unwrap().into_inner().elem
+        })
+    }
+
     pub fn peek_front(&self) -> Option<Ref<T>> {
         self.head.as_ref().map(|node| {
             Ref::map(node.borrow(), |node| &node.elem)
