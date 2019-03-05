@@ -74,4 +74,5 @@ impl<T> List<T> {
     }
 
     pub fn push_left(&mut self, elem: T) { self.left.push(elem) }
+    pub fn push_right(&mut self, elem: T) { self.right.push(elem) }
 }
