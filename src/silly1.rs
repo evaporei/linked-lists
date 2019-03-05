@@ -53,3 +53,12 @@ impl<T> Stack<T> {
         })
     }
 }
+
+impl<T> Drop for Stack<T> {
+    fn drop(&mut self) {
+        let mut current_link = self.head.take();
+        while let Some(boxed_node) = current_link {
+            current_link = boxed_node.next;
+        }
+    }
+}
