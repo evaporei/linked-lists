@@ -111,6 +111,15 @@ impl<'a, T> Iterator for IterMut<'a, T> {
     }
 }
 
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut current_link = self.head.take();
+        while let Some(mut boxed_node) = current_link {
+            current_link = boxed_node.next.take();
+        }
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::List;
