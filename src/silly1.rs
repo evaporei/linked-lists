@@ -27,4 +27,17 @@ impl<T> Stack<T> {
         node.next = self.head.take();
         self.head = Some(node);
     }
+
+    pub fn pop(&mut self) -> Option<T> {
+        self.pop_node().map(|node| {
+            node.elem
+        })
+    }
+
+    fn pop_node(&mut self) -> Option<Box<Node<T>>> {
+        self.head.take().map(|mut node| {
+            self.head = node.next.take();
+            node
+        })
+    }
 }
