@@ -62,3 +62,14 @@ impl<T> Drop for Stack<T> {
         }
     }
 }
+
+pub struct List<T> {
+    left: Stack<T>,
+    right: Stack<T>,
+}
+
+impl<T> List<T> {
+    pub fn new() -> Self {
+        List { left: Stack::new(), right: Stack::new() }
+    }
+}
