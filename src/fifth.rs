@@ -60,6 +60,12 @@ impl<T> List<T> {
     pub fn iter_mut(&mut self) -> IterMut<T> {
         IterMut { next: self.head.as_mut().map(|node| &mut **node) }
     }
+
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| {
+            &node.elem
+        })
+    }
 }
 
 pub struct IntoIter<T>(List<T>);
