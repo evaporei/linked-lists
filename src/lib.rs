@@ -9,3 +9,6 @@ pub mod third;
 
 // A Bad but Safe Doubly-Linked Deque
 pub mod fourth;
+
+// An Unsafe Singly-Linked Queue
+pub mod fifth;
