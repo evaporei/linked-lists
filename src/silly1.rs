@@ -72,4 +72,6 @@ impl<T> List<T> {
     pub fn new() -> Self {
         List { left: Stack::new(), right: Stack::new() }
     }
+
+    pub fn push_left(&mut self, elem: T) { self.left.push(elem) }
 }
