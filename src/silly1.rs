@@ -40,4 +40,10 @@ impl<T> Stack<T> {
             node
         })
     }
+
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|node| {
+            &node.elem
+        })
+    }
 }
