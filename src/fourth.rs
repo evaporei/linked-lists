@@ -55,8 +55,8 @@ impl<T> List<T> {
         match self.tail.take() {
             Some(old_tail) => {
                 // non-empty list, need to connect the old_head
-                old_tail.borrow_mut().prev = Some(new_tail.clone()); // +1 new_head
-                new_tail.borrow_mut().next = Some(old_tail);         // +1 old_head
+                old_tail.borrow_mut().next = Some(new_tail.clone()); // +1 new_head
+                new_tail.borrow_mut().prev = Some(old_tail);         // +1 old_head
                 self.tail = Some(new_tail);             // +1 new_head, -1 old_head
                 // total: +2 new_head, +0 old_head -- OK!
             }
@@ -93,10 +93,10 @@ impl<T> List<T> {
     pub fn pop_back(&mut self) -> Option<T> {
         // need to take old head, ensuring it's -2
         self.tail.take().map(|old_tail| {               // -1 old
-            match old_tail.borrow_mut().next.take() {
+            match old_tail.borrow_mut().prev.take() {
                 Some(new_tail) => {                     // -1 new
                     // not emptying list
-                    new_tail.borrow_mut().prev.take();  // -1 old
+                    new_tail.borrow_mut().next.take();  // -1 old
                     self.tail = Some(new_tail);         // +1 new
                     // total: -2 old, +0 new
                 }
