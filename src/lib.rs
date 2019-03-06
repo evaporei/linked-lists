@@ -12,3 +12,6 @@ pub mod fourth;
 
 // An Unsafe Singly-Linked Queue
 pub mod fifth;
+
+// The Double Singly-Linked List
+pub mod silly1;
