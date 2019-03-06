@@ -90,4 +90,10 @@ impl<T> List<T> {
             self.right.push_node(node);
         }).is_some()
     }
+
+    pub fn go_right(&mut self) -> bool {
+        self.right.pop_node().map(|node| {
+            self.left.push_node(node);
+        }).is_some()
+    }
 }
