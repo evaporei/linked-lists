@@ -81,4 +81,6 @@ impl<T> List<T> {
 
     pub fn peek_left(&self) -> Option<&T> { self.left.peek() }
     pub fn peek_right(&self) -> Option<&T> { self.right.peek() }
+
+    pub fn peek_left_mut(&mut self) -> Option<&mut T> { self.left.peek_mut() }
 }
