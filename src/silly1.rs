@@ -84,4 +84,10 @@ impl<T> List<T> {
 
     pub fn peek_left_mut(&mut self) -> Option<&mut T> { self.left.peek_mut() }
     pub fn peek_right_mut(&mut self) -> Option<&mut T> { self.right.peek_mut() }
+
+    pub fn go_left(&mut self) -> bool {
+        self.left.pop_node().map(|node| {
+            self.right.push_node(node);
+        }).is_some()
+    }
 }
