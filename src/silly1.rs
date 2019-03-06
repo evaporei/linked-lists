@@ -77,4 +77,5 @@ impl<T> List<T> {
     pub fn push_right(&mut self, elem: T) { self.right.push(elem) }
 
     pub fn pop_left(&mut self) -> Option<T> { self.left.pop() }
+    pub fn pop_right(&mut self) -> Option<T> { self.right.pop() }
 }
